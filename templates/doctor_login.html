@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Doctor Login
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card shadow p-4 mx-auto" style="max-width:400px;">
+
+        <h3 class="text-center text-primary mb-3">Doctor Login</h3>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+                Login
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

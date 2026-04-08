@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Doctor Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow p-4">
+        <h2 class="text-center text-primary mb-4">Doctor Dashboard</h2>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-center align-middle">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Problem</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for patient in patients %}
+                    <tr>
+                        <td>{{ patient.name }}</td>
+                        <td>{{ patient.age }}</td>
+                        <td>{{ patient.problem }}</td>
+
+                        <td>
+                            {% if patient.status %}
+                                <span class="badge bg-success">Completed</span>
+                            {% else %}
+                                <span class="badge bg-danger">Pending</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+    <a href="{% url 'patient_detail' patient.id %}" class="btn btn-info btn-sm">
+        View Details
+    </a>
+</td>
+<td>
+    <a href="{% url 'toggle_status' patient.id %}" class="btn btn-sm
+    {% if patient.status %}btn-danger{% else %}btn-success{% endif %}">
+        {% if patient.status %}
+        Mark Pending
+    {% else %}
+        Mark Completed
+    {% endif %}
+    </a>
+</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5">No patients available</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

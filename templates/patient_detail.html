@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Patient Details
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow p-4">
+        <h3 class="text-center text-primary mb-4">Patient Details</h3>
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th>Name</th>
+                <td>{{ patient.name }}</td>
+            </tr>
+
+            <tr>
+                <th>Age</th>
+                <td>{{ patient.age }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ patient.gender }}</td>
+            </tr>
+
+            <tr>
+                <th>Problem</th>
+                <td>{{ patient.problem }}</td>
+            </tr>
+
+            <tr>
+                <th>Existing Diseases</th>
+                <td>{{ patient.existing_diseases }}</td>
+            </tr>
+
+            <tr>
+                <th>Emergency Contact</th>
+                <td>{{ patient.emergency_contact }}</td>
+            </tr>
+            <tr>
+                <th>Previous Reports</th>
+                <td>
+                    {% if patient.previous_report %}
+        <a href="{{ patient.previous_report.url }}" target="_blank">
+            View Document
+        </a>
+    {% else %}
+        <span class="text-muted">No Previous Reports</span>
+    {% endif %}
+                </td>
+            </tr>
+
+        </table>
+
+        <div class="text-center mt-3">
+            <a href="{% url 'doctor_dashboard' %}" class="btn btn-secondary">
+                Back
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
