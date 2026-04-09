@@ -21,7 +21,7 @@ class PatientForm(forms.ModelForm):
         name = name.strip()
         if not name :
             raise ValidationError("Enter your name")
-        if not name.isalpha():
+        if not re.fullmatch(r"[A-Za-z]+( [A-Za-z]+)*", name):
             raise ValidationError("Name should contain only letters")
         return name
     def clean_phone(self):
